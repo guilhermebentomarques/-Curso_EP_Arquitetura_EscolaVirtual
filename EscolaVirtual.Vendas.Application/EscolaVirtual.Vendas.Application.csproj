@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B429B524-F290-4E60-8D20-FEC9E2214A5C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EscolaVirtual.Vendas.Application</RootNamespace>
+    <AssemblyName>EscolaVirtual.Vendas.Application</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adapters\PagamentoAdapter.cs" />
+    <Compile Include="Adapters\PedidoAdapter.cs" />
+    <Compile Include="ApplicationService.cs" />
+    <Compile Include="Interfaces\IPagamentoAppService.cs" />
+    <Compile Include="Interfaces\IPedidoAppService.cs" />
+    <Compile Include="PagamentoAppService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PedidoAppService.cs" />
+    <Compile Include="ViewModels\PagamentoViewModel.cs" />
+    <Compile Include="ViewModels\PedidoItemViewModel.cs" />
+    <Compile Include="ViewModels\PedidoViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EscolaVirtual.Core.Domain\EscolaVirtual.Core.Domain.csproj">
+      <Project>{01aebe1d-1f15-4e29-96f9-78362d0f8900}</Project>
+      <Name>EscolaVirtual.Core.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EscolaVirtual.Vendas.Data\EscolaVirtual.Vendas.Data.csproj">
+      <Project>{8784875e-d2cb-4898-8de1-5578f01d61c2}</Project>
+      <Name>EscolaVirtual.Vendas.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EscolaVirtual.Vendas.Domain\EscolaVirtual.Vendas.Domain.csproj">
+      <Project>{EB91BBA1-10A2-4837-859B-963DA71B4318}</Project>
+      <Name>EscolaVirtual.Vendas.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

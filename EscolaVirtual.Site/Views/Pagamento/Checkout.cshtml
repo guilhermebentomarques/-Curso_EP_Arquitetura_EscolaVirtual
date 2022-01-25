@@ -1,0 +1,103 @@
+﻿@model EscolaVirtual.Vendas.Application.ViewModels.PagamentoViewModel
+
+@{
+    ViewBag.Title = "Pagamento";
+}
+
+<h2>Pagamento</h2>
+<hr/>
+
+@Html.Partial("_ErrorSummary")
+
+<!-- Credit card form -->
+<div class="container">
+    <div class="row">
+
+        <div class="col-xs-12 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Resumo do Pedido - Total @Model.Valor.ToString("C") </h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" id="payment-form">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    @foreach (var item in Model.Pedido.PedidoItems)
+                                    {
+                                        <li>@item.Descricao - @item.Valor.ToString("C")</li>
+                                    }
+                                </div>
+                             </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><img class="pull-right" src="http://i76.imgup.net/accepted_c22e0.png" alt="">Dados do Cartão</h3>
+                </div>
+                <div class="panel-body">
+                        @using (Html.BeginForm("Checkout", "Pagamento", FormMethod.Post, new { role = "form", id = "payment-form" }))
+                        {
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label>Número do Cartão</label>
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(m => m.NumeroCartao, new { @class = "form-control", placeholder = "Use um cartão válido" })
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-7 col-md-7">
+                                    <div class="form-group">
+                                        <label>Data de Expiração</label>
+                                        <div class="col-xs-6 col-lg-6 pl-ziro">
+                                            @Html.TextBoxFor(m => m.MesVencimento, new { @class = "form-control", placeholder = "MM" })
+                                        </div>
+                                        <div class="col-xs-6 col-lg-6 pl-ziro">
+                                            @Html.TextBoxFor(m => m.AnoVencimento, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-5 col-md-5 pull-right">
+                                    <div class="form-group">
+                                        <label>Código</label>
+                                        @Html.TextBoxFor(m => m.CodigoSeguranca, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label>Cupom de Desconto</label>
+                                        <input type="text" class="form-control" name="couponCode"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button class="btn btn-success btn-lg btn-block" id="Confirmar" type="submit">Confirmar Pagamento</button>
+                                </div>
+                            </div>
+                            <div class="row" style="display: none;">
+                                <div class="col-xs-12">
+                                    <p class="payment-errors"></p>
+                                </div>
+                            </div>
+                        }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

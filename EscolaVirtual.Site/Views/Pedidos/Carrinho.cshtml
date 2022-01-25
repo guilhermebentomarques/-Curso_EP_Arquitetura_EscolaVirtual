@@ -1,0 +1,90 @@
+﻿@model EscolaVirtual.Vendas.Application.ViewModels.PedidoViewModel
+@{
+    ViewBag.Title = "Carrinho";
+}
+
+<div>
+    <h2>@ViewBag.Title</h2>
+</div>
+
+@Html.Partial("_ErrorSummary")
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Curso</th>
+                        <th></th>
+                        <th></th>
+                        <th>Valor</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                @if (Model.PedidoItems == null)
+                {
+                    <tr>
+                        <td class="col-sm-12 col-md-6"><h2>Carrinho Vazio</h2>
+                        <td class="col-sm-1 col-md-1">
+                        <td class="col-sm-1 col-md-1"></td>
+                        <td class="col-sm-1 col-md-1"></td>
+                        <td class="col-sm-1 col-md-1"></td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model.PedidoItems)
+                     {
+                         <tr>
+                             <td class="col-sm-12 col-md-6">
+                             <div class="media">
+                                 <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 40px; height: 40px;"> </a>
+                                 <div class="media-body">
+                                     <h4 class="media-heading"><a href="#">@item.Descricao</a></h4>
+                                     <span class="text-success"><strong>Disponível</strong></span>
+                                 </div>
+                             </div>
+                             <td class="col-sm-1 col-md-1">
+                             <td class="col-sm-1 col-md-1"></td>
+                             <td class="col-sm-1 col-md-1"><strong>@item.Valor.ToString("C")</strong></td>
+                             <td class="col-sm-1 col-md-1">
+                                 <button type="button" class="btn btn-danger">
+                                     <span class="glyphicon glyphicon-remove"></span> Excluir
+                                 </button>
+                             </td>
+                         </tr>
+                     }
+                }
+                <tr>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td>
+                        <h3>Total</h3></td>
+                    <td class="text-right">
+                        <h3><strong>@if (Model.PedidoItems != null)
+                                    {
+
+                                        @Html.Raw(Model.PedidoItems.Sum(p => p.Valor).ToString("C")); 
+                                    }
+                                    </strong></h3></td>
+                </tr>
+                <tr>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td>
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-default">Continuar Comprando <span title="Continuar Comprando" class="glyphicon glyphicon-shopping-cart"></span></a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Checkout", "Pagamento")" class="btn btn-success" id="Comprar">Efetivar Compra <span class="glyphicon glyphicon-play"></span></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

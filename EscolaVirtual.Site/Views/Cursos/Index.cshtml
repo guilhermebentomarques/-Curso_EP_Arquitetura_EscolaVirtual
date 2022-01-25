@@ -1,0 +1,57 @@
+﻿@model IEnumerable<EscolaVirtual.Conteudo.Application.ViewModels.CursoViewModel>
+
+@{
+    ViewBag.Title = "Cursos";
+}
+
+<div>
+    <h2>Lista de Cursos</h2>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>@ViewBag.Title</strong>
+    </div>
+    <table class="table table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vagas)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valor)
+                </td>
+                <td>
+                    @{
+                        var data = DateTime.Parse(@item.DataInicio.ToString()).ToShortDateString();
+                    }
+                    @Html.DisplayFor(modelItem => data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vagas)
+                </td>
+                <td>
+                    <a href="@Url.Action("AdicionarCurso", "Pedidos", new { id = item.CursoId })" id="@item.CursoId" class="btn btn-info"><span title="Matricular" class="glyphicon glyphicon-shopping-cart"></span></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
